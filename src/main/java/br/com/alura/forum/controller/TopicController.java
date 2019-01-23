@@ -22,7 +22,7 @@ public class TopicController {
 		Category subcategory = new Category("Java", new Category("Programação"));
 		Course course = new Course("Java e JSF", subcategory);
 		Topic topic = new Topic("Problemas com o JSF", 
-								"Erro ao fazer conversão da data", 
+								null, 
 								new User("Fulano", "fulano@gmail.com", "123456"), 
 								course);
 		
