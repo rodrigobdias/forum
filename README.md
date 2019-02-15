@@ -4,8 +4,9 @@ Caelum: Curso FJ-27
 
 https://start.spring.io/
 
+Spring Security
 
-
+login com o email aluno@gmail.com e senha 123456
 
 in 'fj27-alura-forum-client'
 
