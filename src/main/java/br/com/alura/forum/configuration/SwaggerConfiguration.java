@@ -48,7 +48,7 @@ public class SwaggerConfiguration {
 				.ignoredParameterTypes(User.class)
 			    .globalOperationParameters(
 			    		Arrays.asList(
-			    				new ParameterBuilder()
+			    			new ParameterBuilder()
 			    				.name("Authorization")
 			    				.description("Header para facilitar o envio do Authorization Bearer Token")
 			    				.modelRef(new ModelRef("string"))
