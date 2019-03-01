@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -30,75 +31,62 @@ import br.com.alura.forum.security.service.UsersService;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-	
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter  {
 
 	@Autowired
 	private UsersService usersService;
-	
+
 	@Autowired
 	private TokenManager tokenManager;
 	
 	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
-			.antMatchers("/api/topics/**").permitAll()
-			.antMatchers("/api/auth/**").permitAll()
-			.anyRequest().authenticated()
-		.and()
-			.cors()
-		.and()
-			.csrf().disable()
-		.sessionManagement()
-			.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-		.and()
-			.addFilterBefore(new JwtAuthenticationFilter(tokenManager, usersService),
-				UsernamePasswordAuthenticationFilter.class)
-		.exceptionHandling()
-			.authenticationEntryPoint(new JwtAuthenticationEntryPoint());
-	}
-
-	/** implementando a infraestrutura mínima para que o Spring Secutiry conheça alguns
-		detalhes sobre como encontrar os dados dos nossos usuários */	
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		
-		auth.userDetailsService(usersService)
-		.passwordEncoder(new BCryptPasswordEncoder());
+	@Bean(BeanIds.AUTHENTICATION_MANAGER)
+	public AuthenticationManager authenticationManagerBean() throws Exception {
+		return super.authenticationManagerBean();
 	}
 	
 	@Override
-	@Bean(BeanIds.AUTHENTICATION_MANAGER)
-	public AuthenticationManager authenticationManagerBean() throws Exception {
-		
-		return super.authenticationManagerBean();
-		
+	protected void configure(HttpSecurity http) throws Exception {
+		http.authorizeRequests()
+				.antMatchers(HttpMethod.GET, "/api/topics/**").permitAll()
+				.antMatchers("/api/auth/**").permitAll()
+				.anyRequest().authenticated()
+			.and()
+				.cors()
+			.and()
+				.csrf().disable()
+			.sessionManagement()
+				.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+			.and()
+				.addFilterBefore(new JwtAuthenticationFilter(tokenManager, usersService), 
+						UsernamePasswordAuthenticationFilter.class)
+			.exceptionHandling()
+				.authenticationEntryPoint(new JwtAuthenticationEntryPoint());
+				
+	}
+	
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(this.usersService)
+			.passwordEncoder(new BCryptPasswordEncoder());
 	}
 	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		
-		web.ignoring().antMatchers("/**.html", "/v2/api-docs",
-				"/webjars/**", 
-				"/configuration/**",
-				"/swagger-resources/**");
+		web.ignoring().antMatchers("/**.html",  "/v2/api-docs", "/webjars/**", 
+				"/configuration/**", "/swagger-resources/**");
 	}
-
+	
 	private static class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
-		
-		private static final Logger logger = LoggerFactory.getLogger(JwtAuthenticationEntryPoint.class);
 
+		private static final Logger logger = LoggerFactory.getLogger(JwtAuthenticationEntryPoint.class);
+		
 		@Override
-		public void commence(HttpServletRequest request,
-				HttpServletResponse response,
-				AuthenticationException authException)
-				throws IOException, ServletException {
-	
-			logger.error("Um acesso não autorizado foi verificado. Mensagem: {}",
-					authException.getMessage());
-	
-			response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
-					"Você não está autorizado a acessar esse recurso.");
+		public void commence(HttpServletRequest request, HttpServletResponse response,
+				AuthenticationException authException) throws IOException, ServletException {
+			
+			logger.error("Um acesso não autorizado foi verificado. Mensagem: {}", authException.getMessage());
+			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Você não está autorizado a acessar esse recurso.");
 		}
 	}
 }

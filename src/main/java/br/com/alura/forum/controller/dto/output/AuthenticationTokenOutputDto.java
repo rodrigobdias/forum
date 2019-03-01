@@ -1,4 +1,4 @@
-package br.com.alura.forum.security.controller.dto.output;
+package br.com.alura.forum.controller.dto.output;
 
 public class AuthenticationTokenOutputDto {
 

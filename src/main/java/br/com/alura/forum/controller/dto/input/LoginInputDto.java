@@ -1,4 +1,4 @@
-package br.com.alura.forum.security.controller.dto.input;
+package br.com.alura.forum.controller.dto.input;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
@@ -22,9 +22,8 @@ public class LoginInputDto {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+	
 	public UsernamePasswordAuthenticationToken build() {
 		return new UsernamePasswordAuthenticationToken(this.email, this.password);
 	}
-
 }

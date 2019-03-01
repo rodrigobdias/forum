@@ -2,23 +2,21 @@ package br.com.alura.forum.validator.dto;
 
 public class FieldErrorOutputDto {
 
-	private String field;
-	private String message;
+    private String field;
+    private String message;
 
-	FieldErrorOutputDto() {
-	}
+    FieldErrorOutputDto() { }
 
-	public FieldErrorOutputDto(String field, String message) {
-		this.field = field;
-		this.message = message;
+    public FieldErrorOutputDto(String field, String message) {
+        this.field = field;
+        this.message = message;
+    }
 
-	}
+    public String getField() {
+        return field;
+    }
 
-	public String getField() {
-		return field;
-	}
-
-	public String getMessage() {
-		return message;
-	}
+    public String getMessage() {
+        return message;
+    }
 }

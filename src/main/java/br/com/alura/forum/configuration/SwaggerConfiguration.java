@@ -24,50 +24,50 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class SwaggerConfiguration {
 
 	@Bean
-	public Docket api() {
-		return new Docket(DocumentationType.SWAGGER_2)
-				.select()
-				.apis(RequestHandlerSelectors.basePackage("br.com.alura.forum"))
-				.paths(PathSelectors.ant("/api/**"))
-				.build()
-				.apiInfo(apiInfo())
-				.globalResponseMessage(RequestMethod.GET,
-						Arrays.asList(
-						new ResponseMessageBuilder()
-						.code(500)
-						.message("Xii! Deu erro interno no servidor.")
-						.build(),
-						new ResponseMessageBuilder()
-						.code(403)
-						.message("Forbidden! Você não pode acessar esse recurso.")
-						.build(),
-						new ResponseMessageBuilder()
-						.code(404)
-						.message("O recurso que você buscou não foi encontrado.")
-						.build()))
-				.ignoredParameterTypes(User.class)
-			    .globalOperationParameters(
-			    		Arrays.asList(
-			    			new ParameterBuilder()
-			    				.name("Authorization")
-			    				.description("Header para facilitar o envio do Authorization Bearer Token")
-			    				.modelRef(new ModelRef("string"))
-			    				.parameterType("header")
-			    				.required(false)
-			    				.build()));
-	}
+    public Docket api() { 
+        return new Docket(DocumentationType.SWAGGER_2)
+        		.select()
+        		.apis(RequestHandlerSelectors.basePackage("br.com.alura.forum"))
+        		.paths(PathSelectors.ant("/api/**"))
+        		.build()
+        		.apiInfo(apiInfo())
+        		
+        		.globalResponseMessage(RequestMethod.GET, 
+        			Arrays.asList(
+        				new ResponseMessageBuilder()
+        					.code(500)
+        					.message("Xii! Deu erro interno no servidor.")
+        					.build(),
+        				new ResponseMessageBuilder()
+        					.code(403)
+        					.message("Forbidden! Você não pode acessar esse recurso.")
+        					.build(),
+        				new ResponseMessageBuilder()
+        					.code(404)
+        					.message("O recurso que você buscou não foi encontrado.")
+        					.build()))
+
+		        .ignoredParameterTypes(User.class)
+				.globalOperationParameters(
+					Arrays.asList(
+						new ParameterBuilder()
+							.name("Authorization")
+							.description("Header para facilitar o envio do Authorization Bearer Token")
+							.modelRef(new ModelRef("string"))
+							.parameterType("header")
+							.required(false)
+							.build()));
+    }
 	
 	private ApiInfo apiInfo() {
 		Contact contato = new Contact("Alura", 
-				"https://cursos.alura.com.br/", 
-				"contato@alura.com.br");
+				"https://cursos.alura.com.br/", "contato@alura.com.br");
 		
 		return new ApiInfoBuilder()
-		.title("Alura Forum API Documentation")
-		.description("Esta é a documentação interativa da Rest API do Fórum da Alura. Tente enviar algum request ;)")
-		.version("1.0")
-		.contact(contato)
-		.build();
-		}
-
+				.title("Alura Forum API Documentation")
+				.description("Esta é a documentação interativa da Rest API do Fórum da Alura. Tente enviar algum request ;)")
+				.version("1.0")
+				.contact(contato)
+				.build();		
+	}
 }

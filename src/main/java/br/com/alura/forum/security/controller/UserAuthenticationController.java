@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.alura.forum.security.controller.dto.input.LoginInputDto;
-import br.com.alura.forum.security.controller.dto.output.AuthenticationTokenOutputDto;
+import br.com.alura.forum.controller.dto.input.LoginInputDto;
+import br.com.alura.forum.controller.dto.output.AuthenticationTokenOutputDto;
 import br.com.alura.forum.security.jwt.TokenManager;
 
 @RestController
@@ -22,37 +22,26 @@ public class UserAuthenticationController {
 
 	@Autowired
 	private AuthenticationManager authManager;
-
+	
 	@Autowired
 	private TokenManager tokenManager;
 
-	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, 
+			produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<AuthenticationTokenOutputDto> authenticate(@RequestBody LoginInputDto loginInfo) {
-		
-		UsernamePasswordAuthenticationToken authenticationToken = 
-				loginInfo
-				.build();
-		
-		try {
-			Authentication authentication = 
-					authManager
-					.authenticate(authenticationToken);
-			
-			String jwt = 
-					tokenManager
-					.generateToken(authentication);
-			
-			AuthenticationTokenOutputDto tokenResponse = 
-					new AuthenticationTokenOutputDto("Bearer", jwt);
-			
-			return ResponseEntity
-					.ok(tokenResponse);
-			
-		} catch (AuthenticationException e) {
-			return ResponseEntity
-					.badRequest()
-					.build();
-		}
-	}
+	
+		UsernamePasswordAuthenticationToken authenticationToken = loginInfo.build();
 
+		try {
+			Authentication authentication = authManager.authenticate(authenticationToken); 			
+			String jwt = tokenManager.generateToken(authentication);
+			
+			AuthenticationTokenOutputDto tokenResponse = new AuthenticationTokenOutputDto("Bearer", jwt);
+			return ResponseEntity.ok(tokenResponse);
+		
+		} catch (AuthenticationException e) {
+			return ResponseEntity.badRequest().build();
+		}
+		
+	}
 }
