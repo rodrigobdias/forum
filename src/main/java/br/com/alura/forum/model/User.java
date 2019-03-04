@@ -48,6 +48,12 @@ public class User implements UserDetails {
 		this.name = name;
 	}
 	
+	public User(String name, String email, String password) {
+		this.name = name;
+		this.email = email;
+		this.password = password;
+	}
+	
 	public Long getId() {
 		return this.id;
 	}
