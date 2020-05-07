@@ -30,6 +30,7 @@ public class User implements UserDetails {
 	
 	private String name;
 
+	
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Role> authorities = new ArrayList<>();
 
