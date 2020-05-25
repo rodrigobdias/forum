@@ -1,11 +1,17 @@
 package br.com.alura.forum.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Topico {
+public class Topico implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private Long id;
 	private String titulo;
 	private String mensagem;
