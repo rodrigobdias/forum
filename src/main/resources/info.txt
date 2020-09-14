@@ -1,5 +1,8 @@
 (Obs:Entre aspas simples)
-(Criar imagem: docker build -t alura/forum .) 
+docker build -t alura/forum .
+
+docker run -p 8081:8081 -e SPRING_PROFILES_ACTIVE='prod' -e FORUM_DATABASE_URL='jdbc:mysql://localhost/alura_forum?createDatabaseIfNotExist=true&useSSL=false' -e FORUM_DATABASE_USERNAME='root' -e FORUM_DATABASE_PASSWORD='123' -e FORUM_JWT_SECRET='123456' alura/forum
+ 
 
 export FORUM_DATABASE_URL='jdbc:mysql://localhost/alura_forum?createDatabaseIfNotExist=true&useSSL=false'
 export FORUM_DATABASE_USERNAME='root'
