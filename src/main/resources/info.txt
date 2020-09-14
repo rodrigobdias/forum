@@ -1,4 +1,5 @@
 (Obs:Entre aspas simples)
+(Criar imagem: docker build -t alura/forum .) 
 
 export FORUM_DATABASE_URL='jdbc:mysql://localhost/alura_forum?createDatabaseIfNotExist=true&useSSL=false'
 export FORUM_DATABASE_USERNAME='root'
