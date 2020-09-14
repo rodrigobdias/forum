@@ -1,0 +1,44 @@
+(Obs:Entre aspas simples)
+
+export FORUM_DATABASE_URL='jdbc:mysql://localhost/alura_forum?createDatabaseIfNotExist=true&useSSL=false'
+export FORUM_DATABASE_USERNAME='root'
+export FORUM_DATABASE_PASSWORD='123'
+
+export FORUM_JWT_SECRET=rm'!@N=Ke!~p8VTA2ZRK~nMDQX5Uvm!m'D&]{@Vr?G;2?XhbC:Qa#9#eMLN\}x3?JR3.2zr~v)gYF^8\:8>:XfB:Ww75N/emt9Yj[bQMNCWwW\J?N,nvH.<2\.r~w]*e~vgak)X"v8H`MH/7"2E`,^k@n<vE-wD3g9JWPy;CrY*.Kd2_D])=><D?YhBaSua5hW%{2]_FVXzb9`8FH^b[X3jzVER&:jw2<=c38=>L/zBq`}C6tT*cCSVC^c]-L}&/
+
+
+******************************************
+
+
+-DFORUM_DATABASE_URL=jdbc:mysql://localhost/alura_forum?createDatabaseIfNotExist=true&useSSL=false
+-DFORUM_DATABASE_USERNAME=root
+-DFORUM_DATABASE_PASSWORD=123
+-DFORUM_JWT_SECRET=rm'!@N=Ke!~p8VTA2ZRK~nMDQX5Uvm!m'D&]{@Vr?G;2?XhbC:Qa#9#eMLN\}x3?JR3.2zr~v)gYF^8\:8>:XfB:Ww75N/emt9Yj[bQMNCWwW\J?N,nvH.<2\.r~w]*e~vgak)X"v8H`MH/7"2E`,^k@n<vE-wD3g9JWPy;CrY*.Kd2_D])=><D?YhBaSua5hW%{2]_FVXzb9`8FH^b[X3jzVER&:jw2<=c38=>L/zBq`}C6tT*cCSVC^c]-L}&/
+
+-Dspring.profiles.active=prod
+
+
+******************************************
+
+
+-DFORUM_DATABASE_URL=jdbc:mysql://localhost/alura_forum?createDatabaseIfNotExist=true&useSSL=false
+-DFORUM_DATABASE_USERNAME=root
+-DFORUM_DATABASE_PASSWORD=123
+-DFORUM_JWT_SECRET=123456
+
+-Dspring.profiles.active=prod
+
+
+******************************************
+
+
+java -jar -D... forum.jar
+
+
+******************************************
+
+java -jar -Dspring.profiles.active=prod ... forum.jar
+
+
+
+ 
