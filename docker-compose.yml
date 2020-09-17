@@ -3,8 +3,8 @@ version: '3.3'
 services:
 
   forum:
-    image: alura_forum
-    container_name: alura_forum_1 
+    build: .
+    container_name: alura_forum 
     ports:
       - '8081:8081'
 
