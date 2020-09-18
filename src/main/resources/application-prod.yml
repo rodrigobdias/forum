@@ -7,8 +7,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost/alura_forum?createDatabaseIfNotExist=true&useSSL=false
-    username: root
-    password: 123
+    username: mysql123
+    password: mysql123
     
 # jpa properties
   jpa:

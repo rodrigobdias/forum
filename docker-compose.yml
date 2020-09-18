@@ -7,6 +7,10 @@ services:
     container_name: alura_forum 
     ports:
       - '8081:8081'
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql_default:3306/alura_forum?autoReconnect=true&useSSL=false
+      SPRING_DATASOURCE_USERNAME: mysql123
+      SPRING_DATASOURCE_PASSWORD: mysql123
 
 networks:
   default:
