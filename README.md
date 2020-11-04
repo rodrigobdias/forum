@@ -1,8 +1,7 @@
 # forum
+=======
 
-Projeto desenvolvido no curso de Spring Boot e Spring Framework
-
-Desenvolvimento de uma API Rest
+Desenvolvimento de uma API Rest com Spring Boot e Spring Framework
 
 Spring Boot 2.2.7
 
