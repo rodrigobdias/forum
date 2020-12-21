@@ -11,7 +11,11 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql_default:3306/alura_forum?autoReconnect=true&useSSL=false
       SPRING_DATASOURCE_USERNAME: mysql123
       SPRING_DATASOURCE_PASSWORD: mysql123
-
+    logging:
+      driver: gelf
+      options:
+        gelf-address: "udp://0.0.0.0:12201"
+        tag: "forum"      
 networks:
   default:
     external:
